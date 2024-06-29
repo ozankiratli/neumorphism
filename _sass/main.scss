@@ -22,6 +22,10 @@ $card-bg-color: linear-gradient(
 );
 $primary-color: #ff073a;
 
+$skill-language-color: #e84a5f;
+$skill-framework-color: #ff847c;
+$skill-tool-color: #fecea8;
+
 /* General */
 
 html {
@@ -392,15 +396,15 @@ a {
   }
 
   div[skill-type="language"] {
-    color: #e84a5f;
+    color: $skill-language-color;
   }
 
   div[skill-type="framework"] {
-    color: #ff847c;
+    color: $skill-framework-color;
   }
 
   div[skill-type="tool"] {
-    color: #fecea8;
+    color: $skill-tool-color;
   }
 
   div[skill-weight="1"] {
@@ -712,9 +716,11 @@ a {
       padding: 0.5rem 0.25rem;
       text-align: center;
       width: 21%;
+      transition: 0.75s;
 
       &:hover {
         letter-spacing: 0.25rem;
+        transition: 0.75s;
       }
     }
 
@@ -724,12 +730,94 @@ a {
       opacity: 0;
       padding: 0;
       width: 0;
+      transition: opacity 0s;
     }
 
-    input[type="radio"]:checked + .filter-button {
-      color: $primary-color;
+    input[id="language"]+ .filter-button {
+      &:hover{
+        color: $skill-language-color;
+      }
+    }
+
+    input[id="framework"]+ .filter-button {
+      &:hover{
+        color: $skill-framework-color;
+      }
+    }
+
+    input[id="tool"]+ .filter-button {
+      &:hover{
+        color: $skill-tool-color;
+      }
+    }
+
+
+    input[id="all"]:checked + .filter-button {
       font-weight: $font-weight-strong;
       @include neumorphism-button-pressed();
+    }
+
+    input[id="language"]:checked + .filter-button {
+      color: $skill-language-color;
+      font-weight: $font-weight-strong;
+      @include neumorphism-button-pressed();
+    }
+
+    input[id="language"]:checked ~ input[id="framework"] + .filter-button {
+      color: $text-color;
+      &:hover{
+        color:$skill-framework-color;
+      }
+    }
+
+    input[id="language"]:checked ~ input[id="tool"] + .filter-button {
+      color: $text-color;
+      &:hover{
+        color:$skill-tool-color;
+      }
+    }
+
+    input[id="framework"]:checked + .filter-button {
+      color: $skill-framework-color;
+      font-weight: $font-weight-strong;
+      @include neumorphism-button-pressed();
+    }
+
+    input[id="framework"]:checked ~ input[id="language"] + .filter-button {
+      color: $text-color;
+    }
+
+    input[id="framework"]:checked ~ input[id="tool"] + .filter-button {
+      color: $text-color;
+      &:hover{
+        color:$skill-tool-color;
+      }
+    }
+
+    input[id="tool"]:checked+ .filter-button {
+      color: $skill-tool-color;
+      font-weight: $font-weight-strong;
+      @include neumorphism-button-pressed();
+    }
+
+    input[id="tool"]:checked ~ input[id="language"] + .filter-button {
+      color: $text-color;
+    }
+
+    input[id="tool"]:checked ~ input[id="framework"] + .filter-button {
+      color: $text-color;
+    }
+
+    input[id="all"]:checked ~ input[id="language"] + .filter-button {
+      color: $skill-language-color;
+    }
+
+    input[id="all"]:checked ~ input[id="framework"] + .filter-button {
+      color: $skill-framework-color;
+    }
+
+    input[id="all"]:checked ~ input[id="tool"] + .filter-button {
+      color: $skill-tool-color;
     }
 
     input[id="language"]:checked ~ div[skill-type="framework"],
